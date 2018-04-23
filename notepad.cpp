@@ -5,11 +5,14 @@
 #include <QFile>
 #include <QTextStream>
 #include <QFileDialog>
+#include <QIcon>
 Notepad::Notepad(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::Notepad)
 {
     ui->setupUi(this);
+    setWindowTitle("QNotepad");
+    setWindowIcon(QIcon(":/icons/icons/qnotepad.png"));
     setCentralWidget(ui->textBody);
 }
 
