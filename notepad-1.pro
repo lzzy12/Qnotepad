@@ -38,3 +38,6 @@ FORMS += \
         notepad.ui \
     about.ui \
     infodialog.ui
+
+RESOURCES += \
+    resources.qrc
