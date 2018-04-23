@@ -26,12 +26,15 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
         main.cpp \
         notepad.cpp \
-    about.cpp
+    about.cpp \
+    infodialog.cpp
 
 HEADERS += \
         notepad.h \
-    about.h
+    about.h \
+    infodialog.h
 
 FORMS += \
         notepad.ui \
-    about.ui
+    about.ui \
+    infodialog.ui

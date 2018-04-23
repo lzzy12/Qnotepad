@@ -2,6 +2,7 @@
 #define NOTEPAD_H
 
 #include <QMainWindow>
+#include <QString>
 
 namespace Ui {
 class Notepad;
@@ -21,8 +22,16 @@ private slots:
 
     void on_actionAbout_triggered();
 
+    void on_actionSave_triggered();
+
+    void on_actionOpen_triggered();
+
+    void on_actionSave_As_triggered();
+
 private:
     Ui::Notepad *ui;
+    QString openFile;
+    QString saveFile;
 };
 
 #endif // NOTEPAD_H
