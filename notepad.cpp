@@ -1,7 +1,6 @@
 #include "notepad.h"
 #include "ui_notepad.h"
 #include "about.h"
-#include "infodialog.h"
 #include <QFile>
 #include <QTextStream>
 #include <QFileDialog>
@@ -44,12 +43,7 @@ void Notepad::on_actionSave_triggered()
         saveFile = QFileDialog::getSaveFileName();
 
     QFile file(saveFile);
-    if (!file.open(QIODevice::WriteOnly | QIODevice::Text))
-    {
-        InfoDialog dialog("Cannot open File for writting");
-        dialog.exec();
-    }
-    else
+    if (file.open(QIODevice::WriteOnly | QIODevice::Text))
     {
         QTextStream out(&file);
         out << ui->textBody->toPlainText();
@@ -61,12 +55,7 @@ void Notepad::on_actionOpen_triggered()
     openFile = QFileDialog::getOpenFileName();
     saveFile = openFile;
     QFile file(openFile);
-    if (!file.open(QIODevice::ReadOnly | QIODevice::Text))
-    {
-        InfoDialog dialog("<font color=\"red\">I/O ERROR:</font> Cannot open File for reading");
-        dialog.exec();
-    }
-    else
+    if (file.open(QIODevice::ReadOnly | QIODevice::Text))
     {
         QTextStream in(&file);
         ui->textBody->setPlainText(in.readAll());
@@ -79,12 +68,7 @@ void Notepad::on_actionSave_As_triggered()
     saveFile = QFileDialog::getSaveFileName();
 
     QFile file(saveFile);
-    if (!file.open(QIODevice::WriteOnly | QIODevice::Text))
-    {
-        InfoDialog dialog("Cannot open File for writting");
-        dialog.exec();
-    }
-    else
+    if (file.open(QIODevice::WriteOnly | QIODevice::Text))
     {
         QTextStream out(&file);
         out << ui->textBody->toPlainText();
