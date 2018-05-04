@@ -34,8 +34,7 @@ HEADERS += \
 
 FORMS += \
         notepad.ui \
-    about.ui \
-    infodialog.ui
+    about.ui
 
 RESOURCES += \
     resources.qrc

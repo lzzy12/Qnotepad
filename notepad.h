@@ -29,6 +29,8 @@ private slots:
     void on_actionSave_As_triggered();
 
 
+    void on_actionFont_triggered();
+
 private:
     Ui::Notepad *ui;
     QString openFile;

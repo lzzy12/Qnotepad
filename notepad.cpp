@@ -5,6 +5,8 @@
 #include <QTextStream>
 #include <QFileDialog>
 #include <QIcon>
+#include <QFont>
+#include <QFontDialog>
 Notepad::Notepad(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::Notepad)
@@ -73,4 +75,11 @@ void Notepad::on_actionSave_As_triggered()
         QTextStream out(&file);
         out << ui->textBody->toPlainText();
     }
+}
+
+void Notepad::on_actionFont_triggered()
+{   bool ok;
+    QFont font = QFontDialog::getFont(&ok);
+    if (ok)
+        ui->textBody->setFont(font);
 }
