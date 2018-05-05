@@ -31,10 +31,16 @@ private slots:
 
     void on_actionFont_triggered();
 
+    void on_actionUndo_triggered();
+
+
+    void on_actionRedo_triggered();
+
 private:
     Ui::Notepad *ui;
     QString openFile;
     QString saveFile;
+    void SaveFile(QString *file);
 };
 
 #endif // NOTEPAD_H

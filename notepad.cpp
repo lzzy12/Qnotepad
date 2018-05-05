@@ -7,6 +7,8 @@
 #include <QIcon>
 #include <QFont>
 #include <QFontDialog>
+#include <QTextCursor>
+
 Notepad::Notepad(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::Notepad)
@@ -15,6 +17,11 @@ Notepad::Notepad(QWidget *parent) :
     setWindowTitle("QNotepad");
     setWindowIcon(QIcon(":/icons/icons/qnotepad.png"));
     setCentralWidget(ui->textBody);
+
+    //Enabling the options, only when applicable
+    connect(ui->textBody, SIGNAL(undoAvailable(bool)), ui->actionUndo, SLOT(setEnabled(bool)));
+    connect(ui->textBody, SIGNAL(redoAvailable(bool)), ui->actionRedo, SLOT(setEnabled(bool)));
+
 }
 
 Notepad::~Notepad()
@@ -22,12 +29,21 @@ Notepad::~Notepad()
     delete ui;
 }
 
+void Notepad::SaveFile(QString *file)
+{
+    QFile File(*file);
+    if (File.open(QIODevice::WriteOnly | QIODevice::Text))
+    {
+        QTextStream out(&File);
+        out << ui->textBody->toPlainText();
+    }
 
+}
 
 void Notepad::on_actionNew_triggered()
 {
     ui->textBody->document()->setPlainText(QString());
-    saveFile = "";
+    saveFile = "";      //So that it won't save the new file to the previous opened file.
 
 }
 
@@ -39,18 +55,7 @@ void Notepad::on_actionAbout_triggered()
 }
 
 
-void Notepad::on_actionSave_triggered()
-{
-    if (saveFile == "")
-        saveFile = QFileDialog::getSaveFileName();
 
-    QFile file(saveFile);
-    if (file.open(QIODevice::WriteOnly | QIODevice::Text))
-    {
-        QTextStream out(&file);
-        out << ui->textBody->toPlainText();
-    }
-}
 
 void Notepad::on_actionOpen_triggered()
 {
@@ -65,21 +70,45 @@ void Notepad::on_actionOpen_triggered()
     }
 }
 
+void Notepad::on_actionSave_triggered()
+{
+    if (saveFile.isEmpty())
+        on_actionSave_As_triggered();
+    else
+        SaveFile(&saveFile);
+
+}
+
 void Notepad::on_actionSave_As_triggered()
 {
     saveFile = QFileDialog::getSaveFileName();
 
-    QFile file(saveFile);
-    if (file.open(QIODevice::WriteOnly | QIODevice::Text))
-    {
-        QTextStream out(&file);
-        out << ui->textBody->toPlainText();
-    }
+    SaveFile(&saveFile);
 }
 
 void Notepad::on_actionFont_triggered()
-{   bool ok;
+{
+    //Takes font details from user with a GUI based dialog
+    bool ok;
     QFont font = QFontDialog::getFont(&ok);
+
+    //Set the font as per selection by the user!
     if (ok)
-        ui->textBody->setFont(font);
+    {
+        QTextCursor *cursor = new QTextCursor(ui->textBody->textCursor());
+
+        if (!cursor->hasSelection())
+            ui->textBody->setFont(font);
+    }
+
+}
+
+void Notepad::on_actionUndo_triggered()
+{
+    ui->textBody->undo();
+}
+
+void Notepad::on_actionRedo_triggered()
+{
+    ui->textBody->redo();
 }
