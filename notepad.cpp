@@ -31,10 +31,10 @@ Notepad::~Notepad()
 
 void Notepad::SaveFile(QString *file)
 {
-    QFile File(*file);
-    if (File.open(QIODevice::WriteOnly | QIODevice::Text))
+    QFile *File = new QFile(*file);
+    if (File->open(QIODevice::WriteOnly | QIODevice::Text))
     {
-        QTextStream out(&File);
+        QTextStream out(File);
         out << ui->textBody->toPlainText();
     }
 
@@ -61,10 +61,10 @@ void Notepad::on_actionOpen_triggered()
 {
     openFile = QFileDialog::getOpenFileName();
     saveFile = openFile;
-    QFile file(openFile);
-    if (file.open(QIODevice::ReadOnly | QIODevice::Text))
+    QFile *file = new QFile(openFile);
+    if (file->open(QIODevice::ReadOnly | QIODevice::Text))
     {
-        QTextStream in(&file);
+        QTextStream in(file);
         ui->textBody->setPlainText(in.readAll());
 
     }
