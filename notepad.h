@@ -55,8 +55,7 @@ private slots:
 
 private:
     Ui::Notepad *ui;
-    QString openFile;
-    QString saveFile;
+    QString currFile;
     void SaveFile(QString *file);
 };
 

@@ -64,7 +64,7 @@ void Notepad::SaveFile(QString *file)
 void Notepad::on_actionNew_triggered()
 {
     ui->textBody->document()->setPlainText(QString());
-    saveFile.clear();      //So that it won't save the new file to the previous opened file.
+    currFile.clear();      //So that it won't save the new file to the previous opened file.
 
 }
 
@@ -80,9 +80,8 @@ void Notepad::on_actionAbout_triggered()
 
 void Notepad::on_actionOpen_triggered()
 {
-    openFile = QFileDialog::getOpenFileName();
-    saveFile = openFile;
-    QFile *file = new QFile(openFile);
+    currFile = QFileDialog::getOpenFileName();
+    QFile *file = new QFile(currFile);
     if (file->open(QIODevice::ReadOnly | QIODevice::Text))
     {
         QTextStream in(file);
@@ -93,18 +92,18 @@ void Notepad::on_actionOpen_triggered()
 
 void Notepad::on_actionSave_triggered()
 {
-    if (saveFile.isEmpty())
+    if (currFile.isEmpty())
         on_actionSave_As_triggered();
     else
-        SaveFile(&saveFile);
+        SaveFile(&currFile);
 
 }
 
 void Notepad::on_actionSave_As_triggered()
 {
-    saveFile = QFileDialog::getSaveFileName();
+    currFile = QFileDialog::getSaveFileName();
 
-    SaveFile(&saveFile);
+    SaveFile(&currFile);
 }
 
 void Notepad::on_actionFont_triggered()
