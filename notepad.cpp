@@ -64,7 +64,7 @@ void Notepad::SaveFile(QString *file)
 void Notepad::on_actionNew_triggered()
 {
     ui->textBody->document()->setPlainText(QString());
-    saveFile = "";      //So that it won't save the new file to the previous opened file.
+    saveFile.clear();      //So that it won't save the new file to the previous opened file.
 
 }
 
