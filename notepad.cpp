@@ -22,8 +22,8 @@ Notepad::Notepad(QWidget *parent) :
     setCentralWidget(ui->textBody);
 
     //Enabling the options, only when applicable
-    connect(ui->textBody, SIGNAL(undoAvailable(bool)), ui->actionUndo, SLOT(setEnabled(bool)));
-    connect(ui->textBody, SIGNAL(redoAvailable(bool)), ui->actionRedo, SLOT(setEnabled(bool)));
+    connect(ui->textBody, &QPlainTextEdit::undoAvailable, ui->actionUndo, &QAction::setEnabled);
+    connect(ui->textBody, &QPlainTextEdit::redoAvailable, ui->actionRedo, &QAction::setEnabled);
 
 }
 
