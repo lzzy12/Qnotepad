@@ -9,6 +9,9 @@
 #include <QFontDialog>
 #include <QTextCursor>
 
+#if 0
+#include <QtDebug>
+#endif
 Notepad::Notepad(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::Notepad)
