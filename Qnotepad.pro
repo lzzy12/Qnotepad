@@ -25,9 +25,9 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
         main.cpp \
-        notepad.cpp \
-    about.cpp \
-    findreplacebox.cpp
+        Notepadpp/notepad.cpp \
+    about/about.cpp \
+    FindReplaceBox/findreplacebox.cpp
 
 HEADERS += \
     include/notepad.h \
