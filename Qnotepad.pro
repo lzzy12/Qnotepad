@@ -35,9 +35,9 @@ HEADERS += \
     include/findreplacebox.h
 
 FORMS += \
-        notepad.ui \
-    about.ui \
-    findreplacebox.ui
+        form/notepad.ui \
+    form/about.ui \
+    form/findreplacebox.ui
 
 RESOURCES += \
     resources.qrc
