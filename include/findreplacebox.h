@@ -1,4 +1,4 @@
-/*   notepad.h
+/*   findreplacebox.h
 *    Copyright 2018, Shivam Jha
 *    This file is part of Notepadpp.
 *    Notepadpp is free software: you can redistribute it and/or modify
@@ -14,49 +14,40 @@
 *    You should have received a copy of the GNU General Public License
 *    along with Foobar.  If not, see <http://www.gnu.org/licenses/>.
 */
+#ifndef FINDREPLACEBOX_H
+#define FINDREPLACEBOX_H
 
-#ifndef NOTEPAD_H
-#define NOTEPAD_H
-
-#include <QMainWindow>
-#include <QString>
+#include <QDialog>
+#include <QPlainTextEdit>
+#include <QLabel>
+#include <QLineEdit>
+#include <QGridLayout>
+#include <QPushButton>
+#include "notepad.h"
 
 namespace Ui {
-class Notepad;
+class FindReplaceBox;
 }
 
-class Notepad : public QMainWindow
+class FindReplaceBox : public QDialog
 {
     Q_OBJECT
 
 public:
-    explicit Notepad(QWidget *parent = 0);
-    ~Notepad();
+    explicit FindReplaceBox(QWidget *parent = 0);
+    ~FindReplaceBox();
 
 private slots:
-
-    void on_actionNew_triggered();
-
-    void on_actionAbout_triggered();
-
-    void on_actionSave_triggered();
-
-    void on_actionOpen_triggered();
-
-    void on_actionSave_As_triggered();
-
-
-    void on_actionFont_triggered();
-
-    void on_actionUndo_triggered();
-
-
-    void on_actionRedo_triggered();
+    void EnableFind();
 
 private:
-    Ui::Notepad *ui;
-    QString currFile;
-    void SaveFile(QString *file);
+    Ui::FindReplaceBox *ui;  
+    QLabel *searchLabel = new QLabel("Text to find: ");
+    QLineEdit *searchBox = new QLineEdit("Text");
+    QPushButton *find = new QPushButton("Find");
+    QGridLayout *layout = new QGridLayout();
+
+
 };
 
-#endif // NOTEPAD_H
+#endif // FINDREPLACEBOX_H

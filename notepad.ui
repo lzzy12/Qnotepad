@@ -58,6 +58,7 @@
      <string>Edit</string>
     </property>
     <addaction name="actionFont"/>
+    <addaction name="actionFind"/>
    </widget>
    <addaction name="menuFile"/>
    <addaction name="menuEdit"/>
@@ -131,11 +132,6 @@
     <string>About</string>
    </property>
   </action>
-  <action name="actionFont">
-   <property name="text">
-    <string>Font</string>
-   </property>
-  </action>
   <action name="actionUndo">
    <property name="enabled">
     <bool>false</bool>
@@ -161,6 +157,16 @@
    </property>
    <property name="text">
     <string>Redo</string>
+   </property>
+  </action>
+  <action name="actionFont">
+   <property name="text">
+    <string>Font</string>
+   </property>
+  </action>
+  <action name="actionFind">
+   <property name="text">
+    <string>Find</string>
    </property>
   </action>
  </widget>

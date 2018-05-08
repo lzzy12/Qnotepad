@@ -10,7 +10,7 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
 TARGET = Qnotepad
 TEMPLATE = app
-
+INCLUDEPATH += include/
 # The following define makes your compiler emit warnings if you use
 # any feature of Qt which has been marked as deprecated (the exact warnings
 # depend on your compiler). Please consult the documentation of the
@@ -26,15 +26,18 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
         main.cpp \
         notepad.cpp \
-    about.cpp
+    about.cpp \
+    findreplacebox.cpp
 
 HEADERS += \
-        notepad.h \
-    about.h
+    include/notepad.h \
+    include/about.h \
+    include/findreplacebox.h
 
 FORMS += \
         notepad.ui \
-    about.ui
+    about.ui \
+    findreplacebox.ui
 
 RESOURCES += \
     resources.qrc

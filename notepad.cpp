@@ -26,7 +26,8 @@
 #include <QFont>
 #include <QFontDialog>
 #include <QTextCursor>
-
+#include <QMessageBox>
+#include <findreplacebox.h>
 #if 0
 #include <QtDebug>
 #endif
@@ -88,6 +89,7 @@ void Notepad::on_actionOpen_triggered()
         ui->textBody->setPlainText(in.readAll());
 
     }
+
 }
 
 void Notepad::on_actionSave_triggered()
@@ -131,4 +133,10 @@ void Notepad::on_actionUndo_triggered()
 void Notepad::on_actionRedo_triggered()
 {
     ui->textBody->redo();
+}
+
+void Notepad::on_actionFind_triggered()
+{
+    FindReplaceBox *ReplaceBox = new FindReplaceBox();
+    ReplaceBox->exec();
 }
