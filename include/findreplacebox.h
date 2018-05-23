@@ -43,7 +43,6 @@ public:
 
 private slots:
     void EnableFind();
-    //void FindNext();
 
 private:
     Ui::FindReplaceBox *ui;  

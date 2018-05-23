@@ -55,13 +55,6 @@ QString FindReplaceBox::getStr()
     return searchBox->text();
 }
 
-void FindNext()
-{
-
-
-
-}
-
 bool FindReplaceBox::getBackChecked()
 {
 
