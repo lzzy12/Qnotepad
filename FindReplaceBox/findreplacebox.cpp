@@ -23,13 +23,18 @@ FindReplaceBox::FindReplaceBox(QWidget *parent):
     ui(new Ui::FindReplaceBox)
 {
     ui->setupUi(this);
+    setWindowTitle("Find");
     layout->addWidget(searchLabel, 0, 0, 1, 1);
     layout->addWidget(searchBox, 0, 1, 1, 1);
     layout->addWidget(find, 2, 1, 1, 2);
+    layout->addWidget(backwardSearch, 3, 0, 1, 2);
+    layout->addWidget(l_backwardSearch, 3, 1, 1, 1);
     setLayout(layout);
     setGeometry(geometry().x() + geometry().width()/2, geometry().y() + geometry().height()/2, 250, 100);
     find->setEnabled(false);
     connect(searchBox, SIGNAL(textEdited(QString)), this, SLOT(EnableFind()));
+    connect(find, &QPushButton::clicked, this, &FindReplaceBox::accept);
+    this->exec();
 }
 
 FindReplaceBox::~FindReplaceBox()
@@ -43,4 +48,23 @@ void FindReplaceBox::EnableFind()
         find->setEnabled(true);
 
     else find->setEnabled(false);
+}
+
+QString FindReplaceBox::getStr()
+{
+    return searchBox->text();
+}
+
+void FindNext()
+{
+
+
+
+}
+
+bool FindReplaceBox::getBackChecked()
+{
+
+        return backwardSearch->isChecked();
+
 }

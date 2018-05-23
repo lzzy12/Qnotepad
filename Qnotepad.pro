@@ -25,7 +25,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
         main.cpp \
-        Notepadpp/notepad.cpp \
+        notepad.cpp \
     about/about.cpp \
     FindReplaceBox/findreplacebox.cpp
 
@@ -37,7 +37,8 @@ HEADERS += \
 FORMS += \
         form/notepad.ui \
     form/about.ui \
-    form/findreplacebox.ui
+    form/findreplacebox.ui \
+    form/savewarnwindow.ui
 
 RESOURCES += \
     resources.qrc

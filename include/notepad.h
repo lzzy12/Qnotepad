@@ -20,6 +20,7 @@
 
 #include <QMainWindow>
 #include <QString>
+#include <QCheckBox>
 
 namespace Ui {
 class Notepad;
@@ -55,10 +56,14 @@ private slots:
     
     void on_actionFind_triggered();
 
+    //void warnSave();
+
 private:
     Ui::Notepad *ui;
     QString currFile;
     void SaveFile(QString *file);
+    QCheckBox *backSearch;
+    void closeEvent (QCloseEvent *event);
 };
 
 #endif // NOTEPAD_H

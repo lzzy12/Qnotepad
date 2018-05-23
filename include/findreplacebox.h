@@ -23,6 +23,8 @@
 #include <QLineEdit>
 #include <QGridLayout>
 #include <QPushButton>
+#include <QString>
+#include <QCheckBox>
 #include "notepad.h"
 
 namespace Ui {
@@ -36,17 +38,21 @@ class FindReplaceBox : public QDialog
 public:
     explicit FindReplaceBox(QWidget *parent = 0);
     ~FindReplaceBox();
+    QString getStr();
+    bool getBackChecked();
 
 private slots:
     void EnableFind();
+    //void FindNext();
 
 private:
     Ui::FindReplaceBox *ui;  
     QLabel *searchLabel = new QLabel("Text to find: ");
-    QLineEdit *searchBox = new QLineEdit("Text");
+    QLineEdit *searchBox = new QLineEdit();
     QPushButton *find = new QPushButton("Find");
     QGridLayout *layout = new QGridLayout();
-
+    QCheckBox *backwardSearch = new QCheckBox();
+    QLabel *l_backwardSearch = new QLabel("Search Backwards");
 
 };
 

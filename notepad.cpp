@@ -28,6 +28,8 @@
 #include <QTextCursor>
 #include <QMessageBox>
 #include <findreplacebox.h>
+#include <QCloseEvent>
+#include <QMainWindow>
 #if 0
 #include <QtDebug>
 #endif
@@ -39,11 +41,9 @@ Notepad::Notepad(QWidget *parent) :
     setWindowTitle("QNotepad");
     setWindowIcon(QIcon(":/icons/icons/qnotepad.png"));
     setCentralWidget(ui->textBody);
-
     //Enabling the options, only when applicable
     connect(ui->textBody, &QPlainTextEdit::undoAvailable, ui->actionUndo, &QAction::setEnabled);
     connect(ui->textBody, &QPlainTextEdit::redoAvailable, ui->actionRedo, &QAction::setEnabled);
-
 }
 
 Notepad::~Notepad()
@@ -53,6 +53,9 @@ Notepad::~Notepad()
 
 void Notepad::SaveFile(QString *file)
 {
+    if (file->isEmpty())
+        on_actionSave_triggered();
+
     QFile *File = new QFile(*file);
     if (File->open(QIODevice::WriteOnly | QIODevice::Text))
     {
@@ -137,6 +140,47 @@ void Notepad::on_actionRedo_triggered()
 
 void Notepad::on_actionFind_triggered()
 {
-    FindReplaceBox *ReplaceBox = new FindReplaceBox();
-    ReplaceBox->exec();
+    FindReplaceBox *searchWindow = new FindReplaceBox;
+    QString searchString = searchWindow->getStr();
+    bool searchBack = searchWindow->getBackChecked();
+    if  (searchBack)
+        ui->textBody->find(searchString, QTextDocument::FindBackward);
+
+    else ui->textBody->find(searchString);
+
+}
+
+void Notepad::closeEvent (QCloseEvent *event)
+{
+
+    QFile *file = new QFile(currFile);
+    if ((file->open(QIODevice::ReadOnly | QIODevice::Text)) || ((currFile.isEmpty()) && (ui->textBody->toPlainText() != QString())))
+    {
+       QTextStream *in = new QTextStream(file);
+       if (((ui->textBody->toPlainText() != QString()) && (in->readAll() != ui->textBody->toPlainText())) || ((currFile.isEmpty()) && (ui->textBody->toPlainText() != QString())))
+       {
+            QMessageBox::StandardButton resBtn = QMessageBox::warning(this, tr("File Not Saved!!"),
+                                                                        tr("You are trying to close an unsaved file. "
+                                                                           "Do you want to save before closing?\n"),
+                                                                        QMessageBox::Cancel | QMessageBox::No |
+                                                                        QMessageBox::Yes,
+                                                                        QMessageBox::Yes);
+            if (resBtn == QMessageBox::Yes)
+            {
+                SaveFile(&currFile);
+                event->accept();
+            }
+
+            else if (resBtn == QMessageBox::No)
+            {
+                event->accept();
+            }
+            else
+            {
+                event->ignore();
+            }
+        }
+       else event->accept();
+    }
+    else event->accept();
 }
